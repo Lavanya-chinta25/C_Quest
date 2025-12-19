@@ -4,11 +4,36 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const formatCode = (code) => {
     if (!code) return '';
-    return code
-        .replace(/;/g, ';\n')
-        .replace(/{/g, '{\n  ')
-        .replace(/}/g, '\n}\n')
-        .replace(/\n\s*\n/g, '\n');
+    let formatted = '';
+    let indentLevel = 0;
+    let parenDepth = 0;
+
+    for (let i = 0; i < code.length; i++) {
+        const char = code[i];
+        if (char === '(') {
+            parenDepth++;
+            formatted += char;
+        } else if (char === ')') {
+            if (parenDepth > 0) parenDepth--;
+            formatted += char;
+        } else if (char === '{') {
+            indentLevel++;
+            formatted += ' {\n' + '  '.repeat(indentLevel);
+        } else if (char === '}') {
+            indentLevel = Math.max(0, indentLevel - 1);
+            formatted += '\n' + '  '.repeat(indentLevel) + '}\n' + '  '.repeat(indentLevel);
+        } else if (char === ';') {
+            formatted += ';';
+            if (parenDepth === 0) {
+                formatted += '\n' + '  '.repeat(indentLevel);
+            } else {
+                formatted += ' ';
+            }
+        } else {
+            formatted += char;
+        }
+    }
+    return formatted.replace(/\n\s*\n/g, '\n').trim();
 };
 
 const Result = ({ studentId }) => {
@@ -101,7 +126,7 @@ const Result = ({ studentId }) => {
                                 let statusClass = '';
                                 // Logic for styling result options
                                 // q.correct_answer is the key (e.g., "A")
-                                if (key === q.correct_answer) statusClass = 'correct';
+                                if (key === q.answer) statusClass = 'correct';
                                 else if (key === selectedKey && !isCorrect) statusClass = 'incorrect';
 
                                 return (

@@ -150,8 +150,10 @@ p {
 }
 
 .option-btn.correct {
-  background: rgba(34, 197, 94, 0.2);
+  background: rgba(34, 197, 94, 0.4);
+  /* Make it more visible */
   border-color: var(--success-color);
+  color: #fff;
 }
 
 .option-btn.incorrect {

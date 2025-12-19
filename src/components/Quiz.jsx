@@ -4,12 +4,41 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const formatCode = (code) => {
     if (!code) return '';
-    // Simple C code formatter
-    return code
-        .replace(/;/g, ';\n')
-        .replace(/{/g, '{\n  ')
-        .replace(/}/g, '\n}\n')
-        .replace(/\n\s*\n/g, '\n'); // Remove extra newlines
+    let formatted = '';
+    let indentLevel = 0;
+    let parenDepth = 0;
+
+    // Normalize spaces slightly to avoid double spacing issues, 
+    // but be careful not to break strings.
+    // For safety, we just iterate the code as is.
+
+    for (let i = 0; i < code.length; i++) {
+        const char = code[i];
+
+        if (char === '(') {
+            parenDepth++;
+            formatted += char;
+        } else if (char === ')') {
+            if (parenDepth > 0) parenDepth--;
+            formatted += char;
+        } else if (char === '{') {
+            indentLevel++;
+            formatted += ' {\n' + '  '.repeat(indentLevel);
+        } else if (char === '}') {
+            indentLevel = Math.max(0, indentLevel - 1);
+            formatted += '\n' + '  '.repeat(indentLevel) + '}\n' + '  '.repeat(indentLevel);
+        } else if (char === ';') {
+            formatted += ';';
+            if (parenDepth === 0) {
+                formatted += '\n' + '  '.repeat(indentLevel);
+            } else {
+                formatted += ' ';
+            }
+        } else {
+            formatted += char;
+        }
+    }
+    return formatted.replace(/\n\s*\n/g, '\n').trim();
 };
 
 const Quiz = ({ studentId, onComplete }) => {
@@ -106,7 +135,7 @@ const Quiz = ({ studentId, onComplete }) => {
         const formattedAnswers = questions.map(q => ({
             questionId: q.id,
             selectedOption: answers[q.id] || 'Not Answered',
-            isCorrect: answers[q.id] === q.correct_answer
+            isCorrect: answers[q.id] === q.answer
         }));
 
         try {

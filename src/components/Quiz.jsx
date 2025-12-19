@@ -1,4 +1,16 @@
 import { useState, useEffect } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+const formatCode = (code) => {
+    if (!code) return '';
+    // Simple C code formatter
+    return code
+        .replace(/;/g, ';\n')
+        .replace(/{/g, '{\n  ')
+        .replace(/}/g, '\n}\n')
+        .replace(/\n\s*\n/g, '\n'); // Remove extra newlines
+};
 
 const Quiz = ({ studentId, onComplete }) => {
     const [questions, setQuestions] = useState([]);
@@ -147,9 +159,27 @@ const Quiz = ({ studentId, onComplete }) => {
                     <span>Student: {studentId}</span>
                 </div>
 
-                <h2 style={{ marginBottom: '2rem', fontSize: '1.5rem', whiteSpace: 'pre-line' }}>
+                <h2 style={{ marginBottom: '1rem', fontSize: '1.5rem', whiteSpace: 'pre-line' }}>
                     {currentQuestion.question}
                 </h2>
+
+                {currentQuestion.code && (
+                    <div className="code-block-container" style={{ textAlign: 'left', marginBottom: '2rem' }}>
+                        <SyntaxHighlighter
+                            language="c"
+                            style={atomDark}
+                            customStyle={{
+                                background: 'rgba(0, 0, 0, 0.4)',
+                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                borderRadius: '8px',
+                                padding: '1rem',
+                                fontSize: '0.9rem'
+                            }}
+                        >
+                            {formatCode(currentQuestion.code)}
+                        </SyntaxHighlighter>
+                    </div>
+                )}
 
                 <div style={{ marginBottom: '2rem' }}>
                     {optionsArray.map(([key, text]) => (

@@ -1,4 +1,15 @@
 import { useState, useEffect } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+const formatCode = (code) => {
+    if (!code) return '';
+    return code
+        .replace(/;/g, ';\n')
+        .replace(/{/g, '{\n  ')
+        .replace(/}/g, '\n}\n')
+        .replace(/\n\s*\n/g, '\n');
+};
 
 const Result = ({ studentId }) => {
     const [data, setData] = useState(null);
@@ -66,6 +77,24 @@ const Result = ({ studentId }) => {
                             <span style={{ marginRight: '1rem', color: 'var(--text-muted)' }}>{idx + 1}.</span>
                             {q.question}
                         </h3>
+
+                        {q.code && (
+                            <div className="code-block-container" style={{ textAlign: 'left', marginBottom: '1rem' }}>
+                                <SyntaxHighlighter
+                                    language="c"
+                                    style={atomDark}
+                                    customStyle={{
+                                        background: 'rgba(0, 0, 0, 0.4)',
+                                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                                        borderRadius: '8px',
+                                        padding: '1rem',
+                                        fontSize: '0.9rem'
+                                    }}
+                                >
+                                    {formatCode(q.code)}
+                                </SyntaxHighlighter>
+                            </div>
+                        )}
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                             {optionsArray.map(([key, text]) => {

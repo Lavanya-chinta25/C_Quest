@@ -1,0 +1,333 @@
+{
+    "source": "PDS.pdf",
+    "exam": "GATE",
+    "subject": "Programming in C",
+    "difficulty": "Easy",
+    "questions": [
+        {
+            "id": 1,
+            "year": "GATE CSE 2000",
+            "topic": "Aliasing",
+            "question": "Aliasing in the context of programming languages refers to:",
+            "options": {
+                "A": "Multiple variables having the same memory location",
+                "B": "Multiple variables having the same value",
+                "C": "Multiple variables having the same identifier",
+                "D": "Multiple uses of the same variable"
+            },
+            "correct_answer": "A"
+        },
+        {
+            "id": 2,
+            "year": "GATE CSE 2004",
+            "topic": "Arrays",
+            "question": "What is the output printed by the following C code?\nchar a[6] = \"world\";\nint i, j;\nfor (i = 0, j = 5; i < j; a[i++] = a[j--]);\nprintf(\"%s\", a);",
+            "options": {
+                "A": "dlrow",
+                "B": "Null string",
+                "C": "dlrld",
+                "D": "worow"
+            },
+            "correct_answer": "A"
+        },
+        {
+            "id": 3,
+            "year": "GATE CSE 2002",
+            "topic": "Functions",
+            "question": "In the C language:",
+            "options": {
+                "A": "At most one activation record exists between the current activation record and main",
+                "B": "The number of activation records depends on function calling sequence",
+                "C": "Visibility of global variables depends on function calls",
+                "D": "Recursion requires a different stack"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 4,
+            "year": "GATE CSE 2011",
+            "topic": "Pointers & Arrays",
+            "question": "What does the following fragment of C program print?\nchar c[] = \"GATE2011\";\nchar *p = c;\nprintf(\"%s\", p + p[3] - p[1]);",
+            "options": {
+                "A": "2011",
+                "B": "ATE2011",
+                "C": "TE2011",
+                "D": "GATE"
+            },
+            "correct_answer": "A"
+        },
+        {
+            "id": 5,
+            "year": "GATE CSE 2012",
+            "topic": "Switch Case",
+            "question": "What will be the output of the following C program?\nchar inChar = 'A';\nswitch(inChar){\ncase 'A': printf(\"Choice A\");\ncase 'B': printf(\"Choice B\");\ndefault: printf(\"No Choice\");\n}",
+            "options": {
+                "A": "Choice A",
+                "B": "Choice AChoice B",
+                "C": "Choice AChoice BNo Choice",
+                "D": "No output"
+            },
+            "correct_answer": "C"
+        },
+        {
+            "id": 6,
+            "year": "GATE CSE 2001",
+            "topic": "Recursion",
+            "question": "What will be the output of the following C program?\nvoid abc(char *s){ if(*s=='\\0') return; abc(s+1); printf(\"%c\",*s);} main(){abc(\"123\");}",
+            "options": {
+                "A": "123",
+                "B": "321",
+                "C": "112233",
+                "D": "No output"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 7,
+            "year": "GATE CSE 2003",
+            "topic": "Type Checking",
+            "question": "Which of the following statements is FALSE?",
+            "options": {
+                "A": "Statically typed languages have fixed variable types",
+                "B": "Untyped languages have no value types",
+                "C": "Dynamically typed languages have no variable types",
+                "D": "Static typing binds one type during execution"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 8,
+            "year": "GATE CSE 2015",
+            "topic": "Pointers",
+            "question": "int arr[]={1,2,3,4,5,6,7,8,9,0,1,2,5}; int *ip=arr+4; printf(\"%d\", ip[1]);",
+            "options": {
+                "A": "4",
+                "B": "5",
+                "C": "6",
+                "D": "7"
+            },
+            "correct_answer": "C"
+        },
+        {
+            "id": 9,
+            "year": "GATE CSE 2000",
+            "topic": "Recursion",
+            "question": "A recursive Fibonacci program without memoization has time complexity:",
+            "options": {
+                "A": "O(n)",
+                "B": "O(n log n)",
+                "C": "O(2^n)",
+                "D": "O(log n)"
+            },
+            "correct_answer": "C"
+        },
+        {
+            "id": 10,
+            "year": "GATE CSE 2004",
+            "topic": "Programming Paradigms",
+            "question": "The goal of structured programming is to:",
+            "options": {
+                "A": "Have well-indented programs",
+                "B": "Infer control flow from compiled code",
+                "C": "Infer control flow from program text",
+                "D": "Avoid GOTO statements"
+            },
+            "correct_answer": "C"
+        },
+        {
+            "id": 11,
+            "year": "GATE CSE 2015",
+            "topic": "Switch Case",
+            "question": "In a switch statement, execution continues to next case when:",
+            "options": {
+                "A": "break is used",
+                "B": "default is used",
+                "C": "break is missing",
+                "D": "case labels mismatch"
+            },
+            "correct_answer": "C"
+        },
+        {
+            "id": 12,
+            "year": "GATE CSE 2002",
+            "topic": "Arrays",
+            "question": "C arrays are stored in memory using:",
+            "options": {
+                "A": "Column-major order",
+                "B": "Row-major order",
+                "C": "Linked allocation",
+                "D": "Dynamic allocation only"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 13,
+            "year": "GATE CSE 2016",
+            "topic": "Pointers",
+            "question": "Which of the following best describes a dangling pointer?",
+            "options": {
+                "A": "Uninitialized pointer",
+                "B": "Pointer to freed memory",
+                "C": "Pointer to stack",
+                "D": "Pointer to global variable"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 14,
+            "year": "GATE CSE 2005",
+            "topic": "Functions",
+            "question": "If a function prototype is removed, the compiler may:",
+            "options": {
+                "A": "Throw syntax error",
+                "B": "Show warning due to type mismatch",
+                "C": "Not compile",
+                "D": "Crash at runtime"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 15,
+            "year": "GATE CSE 2007",
+            "topic": "Arrays",
+            "question": "Which of the following is true for array name in C?",
+            "options": {
+                "A": "It is a variable",
+                "B": "It is a pointer constant",
+                "C": "It is dynamically allocated",
+                "D": "It stores size"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 16,
+            "year": "GATE CSE 2017",
+            "topic": "Pointers",
+            "question": "Memory leak occurs when:",
+            "options": {
+                "A": "malloc fails",
+                "B": "free is used twice",
+                "C": "Allocated memory is not freed",
+                "D": "Stack memory is used"
+            },
+            "correct_answer": "C"
+        },
+        {
+            "id": 17,
+            "year": "GATE CSE 2000",
+            "topic": "Recursion",
+            "question": "Recursion uses which data structure internally?",
+            "options": {
+                "A": "Queue",
+                "B": "Array",
+                "C": "Stack",
+                "D": "Heap"
+            },
+            "correct_answer": "C"
+        },
+        {
+            "id": 18,
+            "year": "GATE CSE 2018",
+            "topic": "Loops",
+            "question": "A for-loop without condition becomes:",
+            "options": {
+                "A": "Syntax error",
+                "B": "Infinite loop",
+                "C": "Single execution loop",
+                "D": "Compile-time error"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 19,
+            "year": "GATE CSE 2004",
+            "topic": "GOTO",
+            "question": "Unrestricted use of goto is harmful because:",
+            "options": {
+                "A": "It increases execution time",
+                "B": "It makes programs difficult to verify",
+                "C": "It increases memory usage",
+                "D": "It increases code length"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 20,
+            "year": "GATE CSE 2015",
+            "topic": "Pointers",
+            "question": "Pointer arithmetic depends on:",
+            "options": {
+                "A": "Value of pointer",
+                "B": "Data type pointed to",
+                "C": "Address width",
+                "D": "Compiler"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 21,
+            "year": "GATE CSE 2003",
+            "topic": "Union",
+            "question": "Memory allocated to a union is equal to:",
+            "options": {
+                "A": "Sum of all members",
+                "B": "Average of members",
+                "C": "Size of largest member",
+                "D": "Size of smallest member"
+            },
+            "correct_answer": "C"
+        },
+        {
+            "id": 22,
+            "year": "GATE CSE 2012",
+            "topic": "Strings",
+            "question": "Strings in C are terminated by:",
+            "options": {
+                "A": "\\n",
+                "B": "\\t",
+                "C": "\\0",
+                "D": "EOF"
+            },
+            "correct_answer": "C"
+        },
+        {
+            "id": 23,
+            "year": "GATE CSE 2009",
+            "topic": "Functions",
+            "question": "Default return type of a function in old C was:",
+            "options": {
+                "A": "void",
+                "B": "int",
+                "C": "char",
+                "D": "float"
+            },
+            "correct_answer": "B"
+        },
+        {
+            "id": 24,
+            "year": "GATE CSE 2014",
+            "topic": "Storage Classes",
+            "question": "Which storage class retains value between function calls?",
+            "options": {
+                "A": "auto",
+                "B": "register",
+                "C": "static",
+                "D": "extern"
+            },
+            "correct_answer": "C"
+        },
+        {
+            "id": 25,
+            "year": "GATE CSE 2011",
+            "topic": "Pointers",
+            "question": "What does a NULL pointer indicate?",
+            "options": {
+                "A": "Pointer to address 0",
+                "B": "Unused pointer",
+                "C": "Pointer not pointing to valid memory",
+                "D": "Garbage value"
+            },
+            "correct_answer": "C"
+        }
+    ]
+}

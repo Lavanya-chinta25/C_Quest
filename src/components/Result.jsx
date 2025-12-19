@@ -1,0 +1,98 @@
+import { useState, useEffect } from 'react';
+
+const Result = ({ studentId }) => {
+    const [data, setData] = useState(null);
+    const [questions, setQuestions] = useState([]); // Store fetched questions
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Fetch results and questions in parallel
+                const [resultRes, questionsRes] = await Promise.all([
+                    fetch(`https://c-quiz.onrender.com/api/quiz/answers/${studentId}`),
+                    fetch('/questions.json')
+                ]);
+
+                if (!resultRes.ok) throw new Error('Failed to load results');
+                if (!questionsRes.ok) throw new Error('Failed to load questions');
+
+                const resultJson = await resultRes.json();
+                const questionsJson = await questionsRes.json();
+
+                setData(resultJson);
+                setQuestions(questionsJson.questions || []);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, [studentId]);
+
+    if (loading) return <div>Loading results...</div>;
+    if (error) return <div style={{ color: 'var(--danger-color)' }}>{error}</div>;
+
+    // Create a map for quick lookup
+    const userAnswers = {};
+    if (data && data.answers) {
+        data.answers.forEach(a => userAnswers[a.questionId] = a);
+    }
+
+    return (
+        <div className="quiz-container" style={{ paddingBottom: '3rem' }}>
+            <div className="glass-panel" style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                <h1>Quiz Completed</h1>
+                <p>Thank you, {studentId}. Your submission has been recorded.</p>
+                <div style={{ marginTop: '1rem', fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--primary-color)' }}>
+                    Score: {data.score} / {questions.length}
+                </div>
+            </div>
+
+            {questions.map((q, idx) => {
+                const userAnswer = userAnswers[q.id];
+                const isCorrect = userAnswer?.isCorrect;
+                // selected is now the option Key (A, B, C...)
+                const selectedKey = userAnswer?.selectedOption;
+
+                // options is an object { A: "...", B: "..." }
+                const optionsArray = Object.entries(q.options);
+
+                return (
+                    <div key={q.id} className="glass-panel" style={{ marginBottom: '1.5rem' }}>
+                        <h3 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'flex-start' }}>
+                            <span style={{ marginRight: '1rem', color: 'var(--text-muted)' }}>{idx + 1}.</span>
+                            {q.question}
+                        </h3>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                            {optionsArray.map(([key, text]) => {
+                                let statusClass = '';
+                                // Logic for styling result options
+                                // q.correct_answer is the key (e.g., "A")
+                                if (key === q.correct_answer) statusClass = 'correct';
+                                else if (key === selectedKey && !isCorrect) statusClass = 'incorrect';
+
+                                return (
+                                    <div
+                                        key={key}
+                                        className={`option-btn ${statusClass}`}
+                                        style={{ cursor: 'default', opacity: statusClass ? 1 : 0.5 }}
+                                    >
+                                        <span style={{ marginRight: '10px', fontWeight: 'bold' }}>{key}.</span>
+                                        {text}
+                                        {key === selectedKey && <span style={{ marginLeft: 'auto', fontSize: '0.8rem' }}>(Your Answer)</span>}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    );
+};
+
+export default Result;
